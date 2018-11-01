@@ -1,0 +1,73 @@
+/*
+  Analog input, analog output, serial output
+
+  Reads an analog input pin, maps the result to a range from 0 to 255 and uses
+  the result to set the pulse width modulation (PWM) of an output pin.
+  Also prints the results to the Serial Monitor.
+
+  The circuit:
+  - potentiometer connected to analog pin 0.
+    Center pin of the potentiometer goes to the analog pin.
+    side pins of the potentiometer go to +5V and ground
+  - LED connected from digital pin 9 to ground
+
+  created 29 Dec. 2008
+  modified 9 Apr 2012
+  by Tom Igoe
+
+  This example code is in the public domain.
+
+  http://www.arduino.cc/en/Tutorial/AnalogInOutSerial
+*/
+
+// These constants won't change. They're used to give names to the pins used:
+const int analogInPin1 = A1;  // Analog input pin that the potentiometer is attached to
+const int analogInPin2 = A0;  // Analog input pin that the potentiometer is attached to
+const int analogInPin3 = A6;  // Analog input pin that the potentiometer is attached to
+const int analogInPin4 = A7;  // Analog input pin that the potentiometer is attached to
+const int analogOutPin1 = 5; // Analog output pin that the LED is attached to
+const int analogOutPin2 = 6; // Analog output pin that the LED is attached to
+const int analogOutPin3 = 10; // Analog output pin that the LED is attached to
+const int analogOutPin4 = 11; // Analog output pin that the LED is attached to
+
+int sensorValue1 = 0;        // value read from the pot
+int sensorValue2 = 0;        // value read from the pot
+int sensorValue3 = 0;        // value read from the pot
+int sensorValue4 = 0;        // value read from the pot
+int outputValue1 = 0;        // value output to the PWM (analog out)
+int outputValue2 = 0;        // value output to the PWM (analog out)
+int outputValue3 = 0;        // value output to the PWM (analog out)
+int outputValue4 = 0;        // value output to the PWM (analog out)
+
+void setup() {
+  // initialize serial communications at 9600 bps:
+  Serial.begin(9600);
+}
+
+void loop() {
+  sensorValue1 = analogRead(analogInPin1);  // read 
+  sensorValue2 = analogRead(analogInPin2);  // the
+  sensorValue1 = analogRead(analogInPin3);  // analog in
+  sensorValue2 = analogRead(analogInPin4);  // value:
+  outputValue1 = map(sensorValue1, 0, 1023, 0, 255);  // map it to the 
+  outputValue2 = map(sensorValue2, 0, 1023, 0, 255);  // to the range
+  outputValue1 = map(sensorValue3, 0, 1023, 0, 255);  // of the analog 
+  outputValue2 = map(sensorValue4, 0, 1023, 0, 255);  // out:
+  analogWrite(analogOutPin1, outputValue1);  // change
+  analogWrite(analogOutPin2, outputValue2);  // the analog
+  analogWrite(analogOutPin3, outputValue3);  // out 
+  analogWrite(analogOutPin4, outputValue4);  // value:
+  //* print the results to the Serial Monitor:
+  Serial.print("sensor1 = ");
+  Serial.print(sensorValue1);
+  Serial.print("sensor2 = ");
+  Serial.print(sensorValue2);
+  Serial.print("sensor3 = ");
+  Serial.print(sensorValue3);
+  Serial.print("sensor4 = ");
+  Serial.println(sensorValue4);
+//*/
+  // wait 2 milliseconds before the next loop for the analog-to-digital
+  // converter to settle after the last reading:
+  delay(2);
+}
